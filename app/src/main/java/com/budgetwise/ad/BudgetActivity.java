@@ -148,7 +148,7 @@ public class BudgetActivity extends AppCompatActivity {
 
     private void showAddBudgetDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Set Budget");
+        builder.setTitle("Đặt ngân sách");
 
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_budget, null);
         builder.setView(dialogView);
@@ -168,7 +168,7 @@ public class BudgetActivity extends AppCompatActivity {
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategory.setAdapter(categoryAdapter);
 
-        builder.setPositiveButton("Set Budget", (dialog, which) -> {
+        builder.setPositiveButton("Đặt ngân sách", (dialog, which) -> {
             String amountStr = etAmount.getText().toString();
             String thresholdStr = etThreshold.getText().toString();
 

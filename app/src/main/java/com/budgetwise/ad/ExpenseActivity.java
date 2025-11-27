@@ -67,7 +67,7 @@ public class ExpenseActivity extends AppCompatActivity {
         btnSave.setOnClickListener(v -> saveExpense());
 
         // Tự động định dạng số tiền khi nhập
-        etAmount.addTextChangedListener(new NumberTextWatcher(etAmount));
+//        etAmount.addTextChangedListener(new NumberTextWatcher(etAmount));
     }
 
     private void showDatePicker() {

@@ -48,8 +48,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tổng chi tháng này"
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="14sp" />
+                        android:textColor="#CC040303"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvTotalSpent"
@@ -57,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="0 ₫"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#FD0000"
                         android:textSize="32sp"
                         android:textStyle="bold" />
 

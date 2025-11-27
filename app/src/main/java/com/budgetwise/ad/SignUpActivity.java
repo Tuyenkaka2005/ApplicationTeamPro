@@ -4,6 +4,7 @@ package com.budgetwise.ad;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +16,7 @@ public class SignUpActivity extends AppCompatActivity {
     private TextInputEditText etName, etEmail, etPassword, etConfirmPassword;
     private MaterialButton btnSignUp;
     private UserDAO userDAO;
+    private TextView tvLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class SignUpActivity extends AppCompatActivity {
             btnSignUp.setText("Đang tạo tài khoản...");
             signUp();
         });
+        tvLogin = findViewById(R.id.tvLogin);
+        tvLogin.setOnClickListener(v -> startActivity(new Intent(this, LoginActivity.class)));
     }
 
     private void signUp() {

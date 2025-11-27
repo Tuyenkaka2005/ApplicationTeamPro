@@ -16,6 +16,9 @@ import com.google.android.material.appbar.MaterialToolbar;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvGreeting;
+    private TextView tvTotalSpent;
+    private TextView tvRemainingBudget;
+    private DashboardHelper dashboardHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         initializeUI();
         updateGreeting();
+        dashboardHelper = new DashboardHelper(this);
     }
     private void showLogoutDialog() {
         new androidx.appcompat.app.AlertDialog.Builder(this)
@@ -69,7 +73,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeUI() {
         tvGreeting = findViewById(R.id.tvGreeting);
+        tvTotalSpent = findViewById(R.id.tvTotalSpent);
+        tvRemainingBudget = findViewById(R.id.tvRemainingBudget);
 
+        dashboardHelper = new DashboardHelper(this);
         // Các card chức năng
         findViewById(R.id.cardExpenseTracking).setOnClickListener(v ->
                 startActivity(new Intent(this, ExpenseListActivity.class)));
@@ -103,30 +110,43 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.action_logout) {
-//            new androidx.appcompat.app.AlertDialog.Builder(this)
-//                    .setTitle("Đăng xuất")
-//                    .setMessage("Bạn có chắc chắn muốn đăng xuất?")
-//                    .setPositiveButton("Đăng xuất", (dialog, which) -> {
-//                        UserSession.clearUser(this);
-//                        Intent intent = new Intent(this, LoginActivity.class);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                        startActivity(intent);
-//                        finish();
-//                        Toast.makeText(this, "Đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
-//                    })
-//                    .setNegativeButton("Hủy", null)
-//                    .show();
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
     @Override
     protected void onResume() {
         super.onResume();
         updateGreeting();
+        loadDashboardSummary();
     }
+    private void loadDashboardSummary() {
+        String userId = UserSession.getCurrentUserId(this);
+        if (userId == null) return;
+
+        new Thread(() -> {
+            DashboardHelper.Summary summary = dashboardHelper.getMonthlySummary(userId);
+
+            runOnUiThread(() -> {
+                tvTotalSpent.setText(formatCurrency(summary.totalSpent));
+
+                if (summary.totalBudget == 0) {
+                    tvRemainingBudget.setText("Chưa đặt ngân sách");
+                    tvRemainingBudget.setTextColor(getResources().getColor(android.R.color.darker_gray));
+                } else {
+                    tvRemainingBudget.setText(formatCurrency(summary.remaining));
+
+                    if (summary.remaining < 0) {
+                        tvRemainingBudget.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                    } else if (summary.percentage >= 90) {
+                        tvRemainingBudget.setTextColor(getResources().getColor(android.R.color.holo_orange_dark));
+                    } else {
+                        tvRemainingBudget.setTextColor(getResources().getColor(android.R.color.white));
+                    }
+                }
+            });
+        }).start();
+    }
+    private String formatCurrency(double amount) {
+        if (amount == 0) return "0 ₫";
+        java.text.DecimalFormat df = new java.text.DecimalFormat("#,### ₫");
+        return df.format(amount).replace(",", ".");
+    }
+
 }
