@@ -37,22 +37,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeUI() {
-        // Expense Tracking findViewById(R.id.cardExpenseTracking).setOnClickListener(v ->
-        ////                startActivity(new Intent(this, ExpenseListActivity.class)));
-        ////
-        ////        // Budget Setup
-        ////        findViewById(R.id.cardBudgetSetup).setOnClickListener(v ->
-        ////                startActivity(new Intent(this, BudgetActivity.class)));
-        ////
-        ////        // Expense Overview
-        ////        findViewById(R.id.cardExpenseOverview).setOnClickListener(v ->
-        ////                startActivity(new Intent(this, OverviewActivity.class)));
-        ////
-        ////        // Recurring Expenses
-        ////        findViewById(R.id.cardRecurringExpenses).setOnClickListener(v ->
-        ////                startActivity(new Intent(this, RecurringExpenseActivity.class)));
-//
-        // Expense Report
+
+        // Expense Tracking
+       findViewById(R.id.cardExpenseTracking).setOnClickListener(v ->
+               startActivity(new Intent(this, ExpenseActivity.class)));
+
+        // Budget Setup
+        findViewById(R.id.cardBudgetSetup).setOnClickListener(v ->
+                startActivity(new Intent(this, BudgetActivity.class)));
+
+        // Expense Overview
+        findViewById(R.id.cardExpenseOverview).setOnClickListener(v ->
+                startActivity(new Intent(this, OverviewActivity.class)));
+
+        // Recurring Expenses
+        findViewById(R.id.cardRecurringExpenses).setOnClickListener(v ->
+                startActivity(new Intent(this, RecurringExpenseActivity.class)));
+
+//         Expense Report
 //        findViewById(R.id.cardExpenseReport).setOnClickListener(v ->
 //                startActivity(new Intent(this, ReportActivity.class)));
 
