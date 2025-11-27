@@ -32,9 +32,9 @@
             android:id="@+id/btnPrevMonth"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:background="@color/white"
             android:text="◀"
-            android:textSize="18sp"
-            android:background="?attr/selectableItemBackground" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvMonthYear"
@@ -51,9 +51,9 @@
             android:id="@+id/btnNextMonth"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:background="@color/white"
             android:text="▶"
-            android:textSize="18sp"
-            android:background="?attr/selectableItemBackground" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <!-- Add Budget Button -->
