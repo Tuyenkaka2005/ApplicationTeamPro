@@ -1,7 +1,9 @@
 package com.budgetwise.ad;
 
 import android.app.AlertDialog;
+
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -42,7 +44,11 @@ public class BudgetActivity extends AppCompatActivity {
     private BudgetDAO budgetDAO;
     private CategoryDAO categoryDAO;
     private BudgetNotificationManager notificationManager;
+
+//    private String currentUserId = "user_demo"; // Replace with actual user ID from session
+
     private String currentUserId; // Replace with actual user ID from session
+
     private int currentMonth;
     private int currentYear;
     private List<BudgetStatus> budgetStatuses;
@@ -61,6 +67,7 @@ public class BudgetActivity extends AppCompatActivity {
             finish();
             return;
         }
+
         // Initialize
         initializeViews();
         initializeData();

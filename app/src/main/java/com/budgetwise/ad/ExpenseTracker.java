@@ -75,3 +75,4 @@ public class ExpenseTracker {
         Log.d(TAG, "Daily budget check completed");
     }
 }
+

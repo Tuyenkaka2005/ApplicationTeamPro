@@ -33,6 +33,7 @@ public class RecurringHelper {
     public static List<RecurringExpense> getAllRecurringExpenses(Context context) {
         List<RecurringExpense> list = new ArrayList<>();
         SQLiteDatabase db = DatabaseHelper.getInstance(context).getReadableDatabase();
+
         String userId = UserSession.getCurrentUserId(context);
 
 

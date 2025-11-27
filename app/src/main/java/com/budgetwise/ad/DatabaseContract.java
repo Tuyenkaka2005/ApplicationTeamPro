@@ -79,6 +79,7 @@ public final class DatabaseContract {
 
     // ==================== EXPENSE TABLE ====================
     public static class ExpenseEntry implements BaseColumns {
+
         public static final String TABLE_NAME = "expenses";
 
         public static final String COLUMN_EXPENSE_ID = "expense_id";
@@ -128,6 +129,9 @@ public final class DatabaseContract {
 
         public static final String SQL_CREATE_INDEX_CATEGORY =
                 "CREATE INDEX idx_expense_category ON " + TABLE_NAME + "(" + COLUMN_CATEGORY_ID + ")";
+
+        public static final String SQL_CREATE_INDEX_RECURRING =
+                "CREATE INDEX IF NOT EXISTS idx_expense_recurring_id ON " + TABLE_NAME + "(" + COLUMN_RECURRING_ID + ");";
     }
 
     // ==================== BUDGET TABLE ====================

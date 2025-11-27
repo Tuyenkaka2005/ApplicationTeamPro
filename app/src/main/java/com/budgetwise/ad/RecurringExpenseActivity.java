@@ -1,4 +1,3 @@
-// RecurringExpenseActivity.java
 package com.budgetwise.ad;
 
 import android.content.Intent;
@@ -20,7 +19,7 @@ public class RecurringExpenseActivity extends AppCompatActivity {
     private Button btnAddRecurring;
     private RecyclerView rvRecurring;
     private RecurringExpenseAdapter adapter;
-    private List<RecurringExpense> recurringList;
+    private List<RecurringExpense> recurringList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +41,18 @@ public class RecurringExpenseActivity extends AppCompatActivity {
         btnAddRecurring = findViewById(R.id.btnAddRecurring);
         rvRecurring = findViewById(R.id.rvRecurringExpenses);
 
-        recurringList = new ArrayList<>();
+        // Load danh mục vào spinner
+        CategoryHelper.loadCategoriesIntoSpinner(this, spinnerCategory);
+
+        // Setup RecyclerView
         adapter = new RecurringExpenseAdapter(this, recurringList, this::loadRecurringExpenses);
         rvRecurring.setLayoutManager(new LinearLayoutManager(this));
         rvRecurring.setAdapter(adapter);
 
-        // Load danh mục vào Spinner
-        CategoryHelper.loadCategoriesIntoSpinner(this, spinnerCategory);
-
-        // Set mặc định cho interval nếu chưa có
-        if (spinnerInterval.getSelectedItem() == null) {
+        // Đặt giá trị mặc định cho interval nếu chưa có
+        if (spinnerInterval.getAdapter() == null || spinnerInterval.getAdapter().getCount() == 0) {
+            // Nếu bạn dùng ArrayAdapter trong XML, không cần set lại
+        } else if (spinnerInterval.getSelectedItem() == null) {
             spinnerInterval.setSelection(0);
         }
     }
@@ -80,23 +81,24 @@ public class RecurringExpenseActivity extends AppCompatActivity {
             return;
         }
 
-        String categoryId = ((Category) spinnerCategory.getSelectedItem()).getCategoryId();
+        Category selectedCategory = (Category) spinnerCategory.getSelectedItem();
+        String categoryId = selectedCategory.getCategoryId();
         String interval = spinnerInterval.getSelectedItem().toString();
 
-        long startDate = System.currentTimeMillis();
-        long nextRun = RecurringHelper.calculateNextRunDate(interval, startDate);
-
-        String userId = UserSession.getCurrentUserId(RecurringExpenseActivity.this);
+        String userId = UserSession.getCurrentUserId(this);
         if (userId == null) {
-            Toast.makeText(this, "Vui lòng đăng nhập lại", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Phiên đăng nhập hết hạn!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, LoginActivity.class));
             finish();
             return;
         }
 
+        long startDate = System.currentTimeMillis();
+        long nextRun = RecurringHelper.calculateNextRunDate(interval, startDate);
+
         RecurringExpense recurring = new RecurringExpense(
                 java.util.UUID.randomUUID().toString(),
-                UserSession.getCurrentUserId(RecurringExpenseActivity.this),
+                userId,
                 categoryId,
                 title,
                 amount,
@@ -110,9 +112,11 @@ public class RecurringExpenseActivity extends AppCompatActivity {
             Toast.makeText(this, "Đã thêm chi phí định kỳ thành công!", Toast.LENGTH_SHORT).show();
             clearForm();
             loadRecurringExpenses();
-            OverviewHelper.generateMissedRecurringExpenses(this); // Tự động sinh expense nếu cần
+
+            // Tự động sinh các khoản bị bỏ lỡ (nếu có)
+            OverviewHelper.generateMissedRecurringExpenses(this);
         } else {
-            Toast.makeText(this, "Lỗi khi thêm, thử lại!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Lỗi khi thêm, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -126,14 +130,12 @@ public class RecurringExpenseActivity extends AppCompatActivity {
     private void loadRecurringExpenses() {
         recurringList.clear();
         recurringList.addAll(RecurringHelper.getAllRecurringExpenses(this));
-        if (adapter != null) {
-            adapter.notifyDataSetChanged();
-        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        loadRecurringExpenses(); // Refresh khi quay lại
+        loadRecurringExpenses(); // Refresh khi quay lại từ edit/delete
     }
 }

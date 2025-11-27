@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.budgetwise.ad">
 
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- POST_NOTIFICATIONS đã được comment lại như yêu cầu gốc -->
+    <!-- <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> -->
 
     <application
         android:allowBackup="true"
@@ -12,8 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetWise">
 
+        <!-- MainActivity – Launcher -->
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,13 +25,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ExpenseActivity"    android:exported="false" />
-        <activity android:name=".BudgetActivity"     android:exported="false" />
-        <activity android:name=".OverviewActivity"   android:exported="false" />
-        <activity android:name=".RecurringExpenseActivity" android:exported="false" />
-        <activity android:name=".ExpenseListActivity" android:exported="false" />
-        <activity android:name=".LoginActivity"      android:exported="false" />
-        <activity android:name=".SignUpActivity"     android:exported="false" />
+        <!-- Các Activity còn lại – đã gộp đầy đủ, không trùng lặp -->
+        <activity android:name=".MainActivity"              android:exported="false" />
+        <activity android:name=".SignUpActivity"             android:exported="false" />
+        <activity android:name=".ExpenseActivity"            android:exported="false" />
+        <activity android:name=".ExpenseListActivity"       android:exported="false" />
+        <activity android:name=".BudgetActivity"             android:exported="false" />
+        <activity android:name=".OverviewActivity"           android:exported="false" />
+        <activity android:name=".RecurringExpenseActivity"   android:exported="false" />
+        <activity android:name=".SearchFilterActivity"       android:exported="false" />
+        <activity android:name=".ReportActivity"             android:exported="false" />
 
     </application>
 </manifest>
