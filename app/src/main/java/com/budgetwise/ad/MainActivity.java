@@ -38,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.cardBudgetSetup).setOnClickListener(v ->
                 startActivity(new Intent(this, BudgetActivity.class)));
 
-//        // Expense Overview
-//        findViewById(R.id.cardExpenseOverview).setOnClickListener(v ->
-//                startActivity(new Intent(this, OverviewActivity.class)));
-//
-////        // Recurring Expenses
-//        findViewById(R.id.cardRecurringExpenses).setOnClickListener(v ->
-//                startActivity(new Intent(this, RecurringExpenseActivity.class)));
+        // Expense Overview
+        findViewById(R.id.cardExpenseOverview).setOnClickListener(v ->
+                startActivity(new Intent(this, OverviewActivity.class)));
 
-        // Expense Report
+        // Recurring Expenses
+        findViewById(R.id.cardRecurringExpenses).setOnClickListener(v ->
+                startActivity(new Intent(this, RecurringExpenseActivity.class)));
+
+//         Expense Report
 //        findViewById(R.id.cardExpenseReport).setOnClickListener(v ->
 //                startActivity(new Intent(this, ReportActivity.class)));
 
