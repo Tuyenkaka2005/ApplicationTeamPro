@@ -76,20 +76,3 @@ public class ExpenseTracker {
     }
 }
 
-/**
- * Example usage in your expense creation code:
- *
- * // After creating an expense
- * ExpenseDAO expenseDAO = new ExpenseDAO(context);
- * long result = expenseDAO.createExpense(expense);
- *
- * if (result > 0) {
- *     // Expense created successfully, check budget
- *     ExpenseTracker tracker = new ExpenseTracker(context);
- *     tracker.onExpenseAdded(
- *         expense.getUserId(),
- *         expense.getCategoryId(),
- *         expense.getDate()
- *     );
- * }
- */

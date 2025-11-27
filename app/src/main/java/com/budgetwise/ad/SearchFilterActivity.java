@@ -86,8 +86,9 @@ public class SearchFilterActivity extends AppCompatActivity {
     }
 
     private void search() {
-        List<Expense> list = dao.searchExpenses("user_demo",
-                keyword.isEmpty() ? null : keyword, catId, month, year, minAmount);
+        String userId = UserSession.getCurrentUserId(this);
+        if (userId == null) userId = "user_demo";
+        List<Expense> list = dao.searchExpenses(userId, keyword.isEmpty() ? null : keyword, catId, month, year, minAmount);
 
         adapter.updateData(list);
 

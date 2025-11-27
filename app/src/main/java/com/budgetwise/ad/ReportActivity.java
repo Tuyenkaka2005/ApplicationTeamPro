@@ -114,30 +114,37 @@ public class ReportActivity extends AppCompatActivity {
     }
 
     private void loadData(long startDate, long endDate) {
-        // Giả sử User ID là "user_01" (Bạn cần thay bằng ID thật khi có login)
-        String userId = "user_01"; 
+        // LẤY USER ID THẬT TỪ LOGIN (bạn đã có rồi!)
+        String userId = UserSession.getCurrentUserId(this);
+        if (userId == null || userId.isEmpty()) {
+            userId = "user_demo"; // fallback nếu chưa đăng nhập (dev mode)
+        }
 
-        // Lấy dữ liệu từ DB
-        double total = dbHelper.getTotalExpenseForPeriod(userId, startDate, endDate);
+        // DÙNG HÀM ĐÃ CÓ TRONG DatabaseHelper.java
+        double total = dbHelper.getTotalSpent(userId, startDate, endDate);
         List<CategoryReportItem> items = dbHelper.getCategoryReport(userId, startDate, endDate);
 
-        // Hiển thị Tổng tiền
+        // Hiển thị tổng tiền
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         tvGrandTotal.setText(formatter.format(total));
 
-        // Cập nhật list
-        if (total > 0) {
+        // Cập nhật biểu đồ và danh sách
+        if (total > 0 && !items.isEmpty()) {
             for (CategoryReportItem item : items) {
-
-                item.setPercentage((float) ((item.getTotalAmount() / total) * 100));
+                float percentage = (float) ((item.getTotalAmount() / total) * 100);
+                item.setPercentage(percentage);
             }
             setupPieChart(items, (float) total);
+            pieChart.setNoDataText(""); // Xóa thông báo "không có dữ liệu"
         } else {
-            pieChart.clear(); // Xóa biểu đồ nếu ko có data
-            pieChart.setNoDataText("Không có dữ liệu chi tiêu");
+            pieChart.clear();
+            pieChart.setNoDataText("Chưa có chi tiêu trong khoảng thời gian này");
+            pieChart.invalidate();
+            items.clear();
         }
-        
+
         adapter.setData(items);
+        adapter.notifyDataSetChanged(); // Quan trọng!
     }
 
     private void setupPieChart(List<CategoryReportItem> items, float total) {
