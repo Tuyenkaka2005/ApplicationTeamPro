@@ -17,7 +17,7 @@
 
         <!-- MainActivity – Launcher -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +26,7 @@
         </activity>
 
         <!-- Các Activity còn lại – đã gộp đầy đủ, không trùng lặp -->
-        <activity android:name=".MainActivity"              android:exported="false" />
+        <activity android:name=".LoginActivity"              android:exported="false" />
         <activity android:name=".SignUpActivity"             android:exported="false" />
         <activity android:name=".ExpenseActivity"            android:exported="false" />
         <activity android:name=".ExpenseListActivity"       android:exported="false" />
