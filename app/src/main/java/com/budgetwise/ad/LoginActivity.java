@@ -2,12 +2,14 @@
 package com.budgetwise.ad;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -19,10 +21,18 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);  // Assume you create activity_login.xml
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+        setContentView(R.layout.activity_login);
 
-        userDAO = new UserDAO(this);
         initViews();
+        // TỰ ĐỘNG ĐIỀN EMAIL SAU KHI ĐĂNG KÝ THÀNH CÔNG
+        if (getIntent().hasExtra("signup_email")) {
+            String email = getIntent().getStringExtra("signup_email");
+            etEmail.setText(email);
+            etEmail.setSelection(email.length());  // bôi đen để dễ sửa nếu cần
+            etPassword.requestFocus();             // con trỏ nhảy sẵn vào ô mật khẩu
+        }
+        userDAO = new UserDAO(this);
     }
 
     private void initViews() {
@@ -44,10 +54,13 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+
         User user = userDAO.authenticate(email, password);
         if (user != null) {
             UserSession.setCurrentUser(this, user);
             startActivity(new Intent(this, MainActivity.class));
+            SharedPreferences prefs = getSharedPreferences(UserSession.PREF_NAME, MODE_PRIVATE);
+            prefs.edit().putString(UserSession.KEY_NAME, user.getName()).apply();
             finish();
         } else {
             Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();

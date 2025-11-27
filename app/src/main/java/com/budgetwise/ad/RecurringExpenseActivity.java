@@ -1,6 +1,7 @@
 // RecurringExpenseActivity.java
 package com.budgetwise.ad;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -85,9 +86,17 @@ public class RecurringExpenseActivity extends AppCompatActivity {
         long startDate = System.currentTimeMillis();
         long nextRun = RecurringHelper.calculateNextRunDate(interval, startDate);
 
+        String userId = UserSession.getCurrentUserId(RecurringExpenseActivity.this);
+        if (userId == null) {
+            Toast.makeText(this, "Vui lòng đăng nhập lại", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
+
         RecurringExpense recurring = new RecurringExpense(
                 java.util.UUID.randomUUID().toString(),
-                "user_demo",                    // ĐÃ SỬA: dùng user demo
+                UserSession.getCurrentUserId(RecurringExpenseActivity.this),
                 categoryId,
                 title,
                 amount,

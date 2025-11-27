@@ -32,22 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DatabaseContract.DATABASE_NAME, null, DatabaseContract.DATABASE_VERSION);
         this.context = context;
     }
-    //demo
-    private void insertDemoUser(SQLiteDatabase db) {
-        ContentValues values = new ContentValues();
-        values.put(DatabaseContract.UserEntry.COLUMN_USER_ID, "user_demo");
-        values.put(DatabaseContract.UserEntry.COLUMN_NAME, "Demo User");
-        values.put(DatabaseContract.UserEntry.COLUMN_EMAIL, "demo@budgetwise.com");
-        values.put(DatabaseContract.UserEntry.COLUMN_CURRENCY, "VND");
-        values.put(DatabaseContract.UserEntry.COLUMN_DARK_MODE, 0);
 
-        long currentTime = System.currentTimeMillis();
-        values.put(DatabaseContract.UserEntry.COLUMN_CREATED_AT, currentTime);
-        values.put(DatabaseContract.UserEntry.COLUMN_UPDATED_AT, currentTime);
-
-        long result = db.insert(DatabaseContract.UserEntry.TABLE_NAME, null, values);
-        android.util.Log.d("DatabaseHelper", "Demo user created with result: " + result);
-    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -67,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(ExpenseEntry.SQL_CREATE_INDEX_DATE);
         db.execSQL(ExpenseEntry.SQL_CREATE_INDEX_CATEGORY);
 
-        insertDemoUser(db); //demo
+//        insertDemoUser(db); demo
         // Insert default categories
         insertDefaultCategories(db);
 
