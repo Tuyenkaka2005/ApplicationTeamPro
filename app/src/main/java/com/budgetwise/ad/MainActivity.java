@@ -21,6 +21,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Kiểm tra session ngay khi mở MainActivity
+        String userId = UserSession.getCurrentUserId(this);
+        if (userId == null) {
+            // Chưa đăng nhập → đẩy về login
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
