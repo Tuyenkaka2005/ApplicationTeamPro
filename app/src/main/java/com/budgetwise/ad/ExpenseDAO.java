@@ -72,6 +72,7 @@ public class ExpenseDAO {
         return list;
     }
 
+
     /* ============================================================= */
     /*  CRUD CƠ BẢN                                                 */
     /* ============================================================= */
@@ -193,5 +194,36 @@ public class ExpenseDAO {
         }
 
         return e;
+    }
+    /** Lấy tổng chi tiêu của user trong tháng hiện tại */
+    public double getTotalSpentThisMonth(String userId) {
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1; // tháng 1-12
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+
+        return getTotalSpentByMonthYear(userId, currentMonth, currentYear);
+    }
+
+    /** Lấy tổng chi tiêu theo tháng/năm cụ thể */
+    public double getTotalSpentByMonthYear(String userId, int month, int year) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String sql = "SELECT COALESCE(SUM(" + ExpenseEntry.COLUMN_AMOUNT + "), 0) FROM " + ExpenseEntry.TABLE_NAME +
+                " WHERE " + ExpenseEntry.COLUMN_USER_ID + " = ? " +
+                " AND strftime('%m', datetime(" + ExpenseEntry.COLUMN_DATE + "/1000, 'unixepoch')) = ? " +
+                " AND strftime('%Y', datetime(" + ExpenseEntry.COLUMN_DATE + "/1000, 'unixepoch')) = ?";
+
+        String[] args = {
+                userId,
+                String.format("%02d", month),
+                String.valueOf(year)
+        };
+
+        Cursor cursor = db.rawQuery(sql, args);
+        double total = 0;
+        if (cursor.moveToFirst()) {
+            total = cursor.getDouble(0);
+        }
+        cursor.close();
+        return total;
     }
 }

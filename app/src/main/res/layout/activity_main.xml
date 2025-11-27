@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#2196F3"
-            app:title="BudgetWise"
+            app:title="CampusExpense Manager"
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationContentDescription="Quay lại">
@@ -79,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Quản lý tài chính thông minh cùng BudgetWise"
+                        android:text="Quản lý tài chính thông minh cùng CampusExpense Manager"
                         android:textColor="#E3F2FD"
                         android:textSize="15sp" />
                 </LinearLayout>
