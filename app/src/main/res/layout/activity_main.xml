@@ -22,7 +22,7 @@
             app:title="CampusExpense Manager"
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationContentDescription="Quay lại">
+            app:navigationContentDescription="Come back">
 
             <!-- NÚT LOGOUT ĐẶT BÊN TRONG TOOLBAR → HOẠT ĐỘNG 100% -->
             <ImageButton
@@ -32,7 +32,7 @@
                 android:layout_gravity="end"
                 android:layout_marginEnd="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Đăng xuất"
+                android:contentDescription="Log out"
                 android:src="@drawable/ic_logout"
                 app:tint="@android:color/white" />
 
@@ -70,7 +70,7 @@
                         android:id="@+id/tvGreeting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Xin chào!"
+                        android:text="Hello!"
                         android:textColor="#FFFFFF"
                         android:textSize="26sp"
                         android:textStyle="bold" />
@@ -79,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Quản lý tài chính thông minh cùng CampusExpense Manager"
+                        android:text="Manage your finances smartly with CampusExpense Manager"
                         android:textColor="#E3F2FD"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -112,7 +112,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tổng chi tiêu"
+                            android:text="Total expenditure"
                             android:textColor="#FFFFFF"
                             android:textSize="14sp" />
 
@@ -147,7 +147,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Ngân sách còn lại"
+                            android:text="Remaining budget"
                             android:textColor="#FFFFFF"
                             android:textSize="14sp" />
 
@@ -171,7 +171,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
-                android:text="Chức năng"
+                android:text="Function"
                 android:textColor="#1A1A1A"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -213,7 +213,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Theo dõi Chi phí"
+                            android:text="Track Expenses"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -255,7 +255,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Thiết lập Ngân sách"
+                            android:text="Setting a Budget"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -297,7 +297,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Tổng quan Chi phí"
+                            android:text="Cost Overview"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -339,7 +339,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Chi phí Định kỳ"
+                            android:text="Recurring Expenses"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -381,7 +381,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Báo cáo Chi phí"
+                            android:text="Expense Report"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -423,7 +423,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Tìm kiếm và Lọc"
+                            android:text="Search and Filter"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
