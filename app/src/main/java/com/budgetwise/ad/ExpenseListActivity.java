@@ -1,4 +1,3 @@
-// ExpenseListActivity.java - ĐÃ SỬA HOÀN HẢO CHO LAYOUT MỚI
 package com.budgetwise.ad;
 
 import android.content.Intent;

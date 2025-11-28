@@ -56,11 +56,11 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
         holder.tvPercentage.setText(String.format("%.1f%%", item.getPercentage()));
         holder.progressBar.setProgress((int) item.getPercentage());
         
-        // Đổi màu progress bar theo màu category (nếu có logic màu)
+        // Đổi màu progress bar theo màu category
         try {
              holder.progressBar.setProgressTintList(android.content.res.ColorStateList.valueOf(Color.parseColor(item.getCategoryColor())));
         } catch (Exception e) {
-            // Mặc định nếu lỗi màu
+
         }
     }
 

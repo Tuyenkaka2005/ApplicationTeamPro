@@ -18,7 +18,7 @@ public class DashboardHelper {
         int month = cal.get(Calendar.MONTH) + 1;
         int year = cal.get(Calendar.YEAR);
 
-        // Dùng hàm có sẵn trong DatabaseHelper (rất tốt!)
+        // Dùng hàm có sẵn trong DatabaseHelper
         cal.set(year, month - 1, 1, 0, 0, 0);
         long startOfMonth = cal.getTimeInMillis();
 
