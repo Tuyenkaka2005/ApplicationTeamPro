@@ -15,7 +15,8 @@ public class OverviewHelper {
 
     public static MonthlySummary getMonthlySummary(Context context, int month, int year) {
         SQLiteDatabase db = DatabaseHelper.getInstance(context).getReadableDatabase();
-        String userId = "user_demo";
+
+        String userId = UserSession.getCurrentUserId(context);
 
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);

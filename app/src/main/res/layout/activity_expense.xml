@@ -32,10 +32,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etExpenseTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="95dp"
                     android:hint="Tên chi tiêu (VD: Ăn trưa, Grab)" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -44,10 +45,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etExpenseAmount"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="64dp"
                     android:hint="Số tiền (VD: 55000)"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -57,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <Spinner
                     android:id="@+id/spinnerExpenseCategory"
@@ -71,13 +73,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etExpenseDate"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ngày chi (dd/MM/yyyy)"
+                    android:layout_height="67dp"
+                    android:clickable="true"
                     android:focusable="false"
-                    android:clickable="true" />
+                    android:hint="Ngày chi (dd/MM/yyyy)" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Note -->
@@ -85,10 +88,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etExpenseNote"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="57dp"
                     android:hint="Ghi chú (không bắt buộc)"
                     android:maxLines="3" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -97,7 +101,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSaveExpense"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="71dp"
                 android:text="Lưu chi tiêu"
                 android:textSize="16sp"
                 app:cornerRadius="12dp" />

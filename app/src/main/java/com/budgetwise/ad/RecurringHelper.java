@@ -33,8 +33,9 @@ public class RecurringHelper {
     public static List<RecurringExpense> getAllRecurringExpenses(Context context) {
         List<RecurringExpense> list = new ArrayList<>();
         SQLiteDatabase db = DatabaseHelper.getInstance(context).getReadableDatabase();
-//        String userId = UserSession.getCurrentUserId(context);
-        String userId = "user_demo";
+
+        String userId = UserSession.getCurrentUserId(context);
+
 
         Cursor c = db.rawQuery("SELECT * FROM " + DatabaseContract.RecurringExpenseEntry.TABLE_NAME +
                 " WHERE " + DatabaseContract.RecurringExpenseEntry.COLUMN_USER_ID + "=? AND " +

@@ -1,9 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.AD" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <!-- Theme chính của toàn app – BẮT BUỘC kế thừa từ MaterialComponents -->
+    <style name="Theme.BudgetWise" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorPrimaryVariant">#388E3C</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+
+        <item name="colorSecondary">#4CAF50</item>
+        <item name="colorSecondaryVariant">#388E3C</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+
+        <!-- Status bar -->
+        <item name="android:statusBarColor">#388E3C</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Đảm bảo TextInputLayout, Button, Card… dùng đúng style Material -->
+        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
+        <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button</item>
+        <item name="cardViewStyle">@style/Widget.MaterialComponents.CardView</item>
     </style>
 
-    <style name="Theme.AD" parent="Base.Theme.AD" />
 </resources>

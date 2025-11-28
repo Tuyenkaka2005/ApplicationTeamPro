@@ -3,53 +3,38 @@
     package="com.budgetwise.ad">
 
     <!-- Permissions -->
-<!--    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />-->
     <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> -->
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetWise">
 
-
-    <!-- Existing MainActivity -->
+        <!-- MainActivity – Launcher -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".ExpenseListActivity" />
-        <activity android:name=".ExpenseActivity" />
-    </application>
 
-</manifest>
-        <!-- Add BudgetActivity -->
-        <activity
-            android:name=".BudgetActivity"
-            android:label="Budget Management"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OverviewActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".RecurringExpenseActivity"
-            android:exported="false" />
+        <activity android:name=".LoginActivity"              android:exported="false" />
+        <activity android:name=".SignUpActivity"             android:exported="false" />
+        <activity android:name=".ExpenseActivity"            android:exported="false" />
+        <activity android:name=".ExpenseListActivity"       android:exported="false" />
+        <activity android:name=".BudgetActivity"             android:exported="false" />
+        <activity android:name=".OverviewActivity"           android:exported="false" />
+        <activity android:name=".RecurringExpenseActivity"   android:exported="false" />
+        <activity android:name=".SearchFilterActivity"       android:exported="false" />
+        <activity android:name=".ReportActivity"             android:exported="false" />
 
     </application>
-
 </manifest>
-
