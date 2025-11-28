@@ -1,9 +1,12 @@
 package com.budgetwise.ad;
 
+import android.Manifest;
 import android.app.AlertDialog;
 
 import android.content.Intent;
 
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -66,6 +69,12 @@ public class BudgetActivity extends AppCompatActivity {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
             return;
+        }
+        // Xin quyền thông báo trên Android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1001);
+            }
         }
 
         // Initialize
