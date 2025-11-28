@@ -33,9 +33,9 @@ public class BudgetNotificationManager {
 
         for (BudgetDAO.BudgetStatus status : statuses) {
             if (status.isOverBudget()) {
-                notifyUser("Vượt ngân sách: " + getCategoryName(status));
+                notifyUser("Over budget: " + getCategoryName(status));
             } else if (status.isNearLimit()) {
-                notifyUser("Gần hết ngân sách: " + getCategoryName(status));
+                notifyUser("Almost out of budget: " + getCategoryName(status));
             }
         }
     }
@@ -47,22 +47,22 @@ public class BudgetNotificationManager {
             if (!status.budget.getCategoryId().equals(categoryId)) continue;
 
             if (status.isOverBudget()) {
-                notifyUser("Vượt ngân sách danh mục: " + categoryName);
+                notifyUser("Category budget overrun: " + categoryName);
             } else if (status.isNearLimit()) {
-                notifyUser("Cảnh báo: Sắp hết ngân sách " + categoryName);
+                notifyUser("Warning: Budget running out " + categoryName);
             }
         }
     }
 
     private String getCategoryName(BudgetDAO.BudgetStatus status) {
         Category category = new CategoryDAO(context).getCategoryById(status.budget.getCategoryId());
-        return category != null ? category.getName() : "Không xác định";
+        return category != null ? category.getName() : "Unknown";
     }
 
     private void notifyUser(String message) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(android.R.drawable.stat_notify_error)
-                .setContentTitle("Cảnh báo ngân sách")
+                .setContentTitle("Budget warning")
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE)
@@ -87,10 +87,10 @@ public class BudgetNotificationManager {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                     CHANNEL_ID,
-                    "Ngân sách",
+                    "Budget",
                     NotificationManager.IMPORTANCE_HIGH
             );
-            channel.setDescription("Thông báo khi gần hết hoặc vượt ngân sách");
+            channel.setDescription("Notification when near or over budget");
 
             NotificationManager manager = context.getSystemService(NotificationManager.class);
             if (manager != null) {

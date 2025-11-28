@@ -65,7 +65,7 @@ public class BudgetActivity extends AppCompatActivity {
 
         currentUserId = UserSession.getCurrentUserId(this);
         if (currentUserId == null) {
-            Toast.makeText(this, "Phiên đăng nhập hết hạn", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Login session expired", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, LoginActivity.class));
             finish();
             return;
