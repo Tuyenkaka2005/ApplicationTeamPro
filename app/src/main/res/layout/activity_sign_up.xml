@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tạo tài khoản mới"
+            android:text="Create a new account"
             android:textSize="28sp"
             android:textStyle="bold"
             android:textColor="#2E7D32"
@@ -32,7 +32,7 @@
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="57dp"
-                android:hint="Họ và tên" />
+                android:hint="Full name" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,7 +66,7 @@
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="61dp"
-                android:hint="Mật khẩu"
+                android:hint="Pasword"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -84,7 +84,7 @@
                 android:id="@+id/etConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
-                android:hint="Nhập lại mật khẩu"
+                android:hint="Re-enter the password"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -94,7 +94,7 @@
             android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Đăng ký"
+            android:text="Register"
             android:textSize="16sp"
             android:textStyle="bold"
             app:cornerRadius="12dp"
@@ -107,7 +107,7 @@
             android:layout_gravity="center"
             android:clickable="true"
             android:focusable="true"
-            android:text="Đã có tài khoản? Đăng nhập"
+            android:text="Already have an account? Sign in"
             android:textColor="#4CAF50"
             android:textSize="15sp" />
 
