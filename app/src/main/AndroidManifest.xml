@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.budgetwise.ad">
 
     <!-- Permissions -->
-<!--    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />-->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> -->
 
     <application
         android:allowBackup="true"
@@ -15,8 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetWise">
 
-
-    <!-- Existing MainActivity -->
+        <!-- MainActivity – Launcher -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -26,34 +26,16 @@
             </intent-filter>
         </activity>
 
-        <!-- Add BudgetActivity -->
-        <activity
-            android:name=".BudgetActivity"
-            android:label="Budget Management"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OverviewActivity"
-            android:exported="false" />
 
-        <activity
-            android:name=".RecurringExpenseActivity"
-            android:exported="false" />
+        <activity android:name=".LoginActivity"              android:exported="false" />
+        <activity android:name=".SignUpActivity"             android:exported="false" />
+        <activity android:name=".ExpenseActivity"            android:exported="false" />
+        <activity android:name=".ExpenseListActivity"       android:exported="false" />
+        <activity android:name=".BudgetActivity"             android:exported="false" />
+        <activity android:name=".OverviewActivity"           android:exported="false" />
+        <activity android:name=".RecurringExpenseActivity"   android:exported="false" />
+        <activity android:name=".SearchFilterActivity"       android:exported="false" />
+        <activity android:name=".ReportActivity"             android:exported="false" />
 
     </application>
-
 </manifest>
-
-    <!--
-    IMPORTANT NOTES:
-    1. For Android 13+ (API 33+), you need to request POST_NOTIFICATIONS permission at runtime
-    2. Add this code to your MainActivity or BudgetActivity onCreate():
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
-        }
-    }
-    -->

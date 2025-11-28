@@ -5,6 +5,10 @@ import android.util.Log;
 
 import java.util.Calendar;
 
+/**
+ * Helper class to track expenses and trigger budget notifications
+ * Call this whenever an expense is added or updated
+ */
 public class ExpenseTracker {
     private static final String TAG = "ExpenseTracker";
     private Context context;
@@ -71,3 +75,4 @@ public class ExpenseTracker {
         Log.d(TAG, "Daily budget check completed");
     }
 }
+

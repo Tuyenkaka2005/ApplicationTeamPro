@@ -1,398 +1,442 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F4F8">
+    android:background="#F5F7FA"
+    tools:context=".MainActivity">
 
-    <LinearLayout
+    <!-- Toolbar với nút đăng xuất -->
+    <!-- Toolbar với nút đăng xuất BÊN TRONG MaterialToolbar -->
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="wrap_content">
 
-        <!-- Header -->
-        <LinearLayout
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp"
-            android:background="@drawable/bg_header_card"
-            android:elevation="4dp">
+            android:layout_height="?attr/actionBarSize"
+            android:background="#2196F3"
+            app:title="CampusExpense Manager"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationContentDescription="Come back">
 
-            <TextView
-                android:id="@+id/tvGreeting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chào mừng trở lại!"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+            <!-- NÚT LOGOUT ĐẶT BÊN TRONG TOOLBAR → HOẠT ĐỘNG 100% -->
+            <ImageButton
+                android:id="@+id/btnLogout"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Log out"
+                android:src="@drawable/ic_logout"
+                app:tint="@android:color/white" />
 
-            <TextView
-                android:id="@+id/tvSubGreeting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Quản lý chi tiêu thông minh cùng CampusExpense"
-                android:textColor="#E8F5E9"
-                android:layout_marginTop="6dp"
-                android:textSize="14sp" />
-        </LinearLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Quick Overview -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="24dp"
-            android:weightSum="2">
+    <!-- Nội dung cuộn -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:paddingBottom="24dp">
 
-            <!-- Tổng chi tiêu -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="110dp"
-                android:layout_marginEnd="10dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Tổng chi tiêu"
-                        android:textColor="#666666"
-                        android:textSize="15sp" />
-                    <TextView
-                        android:id="@+id/tvTotalSpent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0 ₫"
-                        android:textStyle="bold"
-                        android:textColor="#D32F2F"
-                        android:textSize="24sp"
-                        android:layout_marginTop="4dp" />
-
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Còn lại -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="110dp"
-                android:layout_marginStart="10dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ngân sách còn lại"
-                        android:textColor="#666666"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/tvRemainingBudget"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0 ₫"
-                        android:textStyle="bold"
-                        android:textColor="#388E3C"
-                        android:textSize="24sp"
-                        android:layout_marginTop="4dp" />
-
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
-
-        <!-- Tiêu đề chức năng -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Các Chức Năng"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#333333"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Danh sách chức năng -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Mỗi card cao 78dp, dễ bấm, có ripple effect -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardExpenseTracking"
+            <!-- Header chào mừng -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="78dp"
-                android:layout_marginBottom="14dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="18dp"
-                app:cardElevation="5dp"
-                app:rippleColor="#CCCCCC">
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="#2196F3">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="24dp"
-                    android:paddingEnd="20dp">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_menu"
-                        android:layout_marginEnd="20dp"
-                        app:tint="#4CAF50" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="28dp">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:id="@+id/tvGreeting"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Theo dõi Chi phí"
-                        android:textColor="#333333"
-                        android:textSize="17sp"
+                        android:text="Hello!"
+                        android:textColor="#FFFFFF"
+                        android:textSize="26sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_arrow_forward"
-                        app:tint="#AAAAAA" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Manage your finances smartly with CampusExpense Manager"
+                        android:textColor="#E3F2FD"
+                        android:textSize="15sp" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <!-- Các card còn lại (copy-paste và chỉ đổi text + id) -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardBudgetSetup"
+            <!-- Tổng quan nhanh -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="78dp"
-                android:layout_marginBottom="14dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="18dp"
-                app:cardElevation="5dp"
-                app:rippleColor="#CCCCCC">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="24dp"
-                    android:paddingEnd="20dp">
+                <!-- Tổng chi tiêu -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="#FF5252">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_menu"
-                        android:layout_marginEnd="20dp"
-                        app:tint="#4CAF50" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Thiết lập Ngân sách"
-                        android:textColor="#333333"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total expenditure"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_arrow_forward"
-                        app:tint="#AAAAAA" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:id="@+id/tvTotalSpent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="0 ₫"
+                            android:textColor="#FFFFFF"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardExpenseOverview"
+                <!-- Ngân sách còn lại -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="#4CAF50">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Remaining budget"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvRemainingBudget"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="0 ₫"
+                            android:textColor="#FFFFFF"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Tiêu đề chức năng -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
+                android:text="Function"
+                android:textColor="#1A1A1A"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <!-- Danh sách chức năng -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="78dp"
-                android:layout_marginBottom="14dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="18dp"
-                app:cardElevation="5dp"
-                app:rippleColor="#CCCCCC">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
 
-                <LinearLayout
+                <!-- 1. Theo dõi Chi phí -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardExpenseTracking"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="24dp"
-                    android:paddingEnd="20dp">
+                    android:layout_height="78dp"
+                    android:layout_marginBottom="14dp"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="5dp"
+                    app:cardBackgroundColor="#FFFFFF">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_menu"
-                        android:layout_marginEnd="20dp"
-                        app:tint="#4CAF50" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="20dp">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Tổng quan Chi phí"
-                        android:textColor="#333333"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_expense"
+                            android:layout_marginEnd="20dp"
+                            app:tint="#4CAF50" />
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_arrow_forward"
-                        app:tint="#AAAAAA" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Track Expenses"
+                            android:textColor="#333333"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardRecurringExpenses"
-                android:layout_width="match_parent"
-                android:layout_height="78dp"
-                android:layout_marginBottom="14dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="18dp"
-                app:cardElevation="5dp"
-                app:rippleColor="#CCCCCC">
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            app:srcCompat="@drawable/ic_arrow_right"
+                            app:tint="#AAAAAA" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                <LinearLayout
+                <!-- 2. Thiết lập Ngân sách -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardBudgetSetup"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="24dp"
-                    android:paddingEnd="20dp">
+                    android:layout_height="78dp"
+                    android:layout_marginBottom="14dp"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="5dp"
+                    app:cardBackgroundColor="#FFFFFF">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_menu"
-                        android:layout_marginEnd="20dp"
-                        app:tint="#4CAF50" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="20dp">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Chi phí Định kỳ"
-                        android:textColor="#333333"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_budget"
+                            android:layout_marginEnd="20dp"
+                            app:tint="#2196F3" />
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_arrow_forward"
-                        app:tint="#AAAAAA" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Setting a Budget"
+                            android:textColor="#333333"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardExpenseReport"
-                android:layout_width="match_parent"
-                android:layout_height="78dp"
-                android:layout_marginBottom="14dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="18dp"
-                app:cardElevation="5dp"
-                app:rippleColor="#CCCCCC">
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            app:srcCompat="@drawable/ic_arrow_right"
+                            app:tint="#AAAAAA" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                <LinearLayout
+                <!-- 3. Tổng quan Chi phí -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardExpenseOverview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="24dp"
-                    android:paddingEnd="20dp">
+                    android:layout_height="78dp"
+                    android:layout_marginBottom="14dp"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="5dp"
+                    app:cardBackgroundColor="#FFFFFF">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_menu"
-                        android:layout_marginEnd="20dp"
-                        app:tint="#4CAF50" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="20dp">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Báo cáo Chi phí"
-                        android:textColor="#333333"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_overview"
+                            android:layout_marginEnd="20dp"
+                            app:tint="#9C27B0" />
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_arrow_forward"
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Cost Overview"
+                            android:textColor="#333333"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
 
-                        app:tint="#AAAAAA" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            app:srcCompat="@drawable/ic_arrow_right"
+                            app:tint="#AAAAAA" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardSearchFilter"
-                android:layout_width="match_parent"
-                android:layout_height="78dp"
-                android:layout_marginBottom="20dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="18dp"
-                app:cardElevation="5dp"
-                app:rippleColor="#CCCCCC">
-
-                <LinearLayout
+                <!-- 4. Chi phí Định kỳ -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardRecurringExpenses"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="24dp"
-                    android:paddingEnd="20dp">
+                    android:layout_height="78dp"
+                    android:layout_marginBottom="14dp"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="5dp"
+                    app:cardBackgroundColor="#FFFFFF">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_menu"
-                        android:layout_marginEnd="20dp"
-                        app:tint="#4CAF50" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="20dp">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Tìm kiếm và Lọc Chi Phí"
-                        android:textColor="#333333"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_recurring"
+                            android:layout_marginEnd="20dp"
+                            app:tint="#FF9800" />
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_arrow_forward"
-                        app:tint="#AAAAAA" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Recurring Expenses"
+                            android:textColor="#333333"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
 
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            app:srcCompat="@drawable/ic_arrow_right"
+                            app:tint="#AAAAAA" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 5. Báo cáo Chi phí -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardExpenseReport"
+                    android:layout_width="match_parent"
+                    android:layout_height="78dp"
+                    android:layout_marginBottom="14dp"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="5dp"
+                    app:cardBackgroundColor="#FFFFFF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="20dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_report"
+                            android:layout_marginEnd="20dp"
+                            app:tint="#E91E63" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Expense Report"
+                            android:textColor="#333333"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            app:srcCompat="@drawable/ic_arrow_right"
+                            app:tint="#AAAAAA" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 6. Tìm kiếm & Lọc -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardSearchFilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="78dp"
+                    android:layout_marginBottom="20dp"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="5dp"
+                    app:cardBackgroundColor="#FFFFFF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="20dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_search"
+                            android:layout_marginEnd="20dp"
+                            app:tint="#00BCD4" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Search and Filter"
+                            android:textColor="#333333"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            app:srcCompat="@drawable/ic_arrow_right"
+                            app:tint="#AAAAAA" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
-</ScrollView>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

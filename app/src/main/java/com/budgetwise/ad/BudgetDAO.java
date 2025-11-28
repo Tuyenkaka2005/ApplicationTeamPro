@@ -9,6 +9,7 @@ import com.budgetwise.ad.DatabaseContract.BudgetEntry;
 import com.budgetwise.ad.DatabaseContract.ExpenseEntry;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -238,6 +239,69 @@ public class BudgetDAO {
         cursor.close();
 
         android.util.Log.d("BudgetDAO", "Total spent: " + total);
+        return total;
+    }
+
+    /** Lấy tổng ngân sách (tổng limit) của tất cả danh mục trong tháng hiện tại */
+    public double getTotalBudgetThisMonth(String userId) {
+        int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        int year  = Calendar.getInstance().get(Calendar.YEAR);
+        return getTotalBudgetByMonthYear(userId, month, year);
+    }
+
+    /** Lấy tổng ngân sách theo tháng/năm bất kỳ */
+    public double getTotalBudgetByMonthYear(String userId, int month, int year) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String sql = "SELECT COALESCE(SUM(" + BudgetEntry.COLUMN_AMOUNT_LIMIT + "), 0) " +
+                "FROM " + BudgetEntry.TABLE_NAME + " " +
+                "WHERE " + BudgetEntry.COLUMN_USER_ID + " = ? " +
+                "  AND " + BudgetEntry.COLUMN_MONTH + " = ? " +
+                "  AND " + BudgetEntry.COLUMN_YEAR + " = ? " +
+                "  AND " + BudgetEntry.COLUMN_IS_ACTIVE + " = 1";
+
+        Cursor cursor = db.rawQuery(sql, new String[]{
+                userId,
+                String.valueOf(month),
+                String.valueOf(year)
+        });
+
+        double total = 0;
+        if (cursor.moveToFirst() && !cursor.isNull(0)) {
+            total = cursor.getDouble(0);
+        }
+        cursor.close();
+        return total;
+    }
+
+    /** Lấy tổng chi tiêu tháng hiện tại (tất cả danh mục) */
+    public double getTotalSpentThisMonth(String userId) {
+        int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        int year  = Calendar.getInstance().get(Calendar.YEAR);
+        return getTotalSpentByMonthYear(userId, month, year);
+    }
+
+    /** Lấy tổng chi tiêu theo tháng/năm bất kỳ */
+    public double getTotalSpentByMonthYear(String userId, int month, int year) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String sql = "SELECT COALESCE(SUM(" + ExpenseEntry.COLUMN_AMOUNT + "), 0) " +
+                "FROM " + ExpenseEntry.TABLE_NAME + " " +
+                "WHERE " + ExpenseEntry.COLUMN_USER_ID + " = ? " +
+                "  AND strftime('%m', datetime(" + ExpenseEntry.COLUMN_DATE + "/1000, 'unixepoch')) = ? " +
+                "  AND strftime('%Y', datetime(" + ExpenseEntry.COLUMN_DATE + "/1000, 'unixepoch')) = ?";
+
+        Cursor cursor = db.rawQuery(sql, new String[]{
+                userId,
+                String.format("%02d", month),
+                String.valueOf(year)
+        });
+
+        double total = 0;
+        if (cursor.moveToFirst() && !cursor.isNull(0)) {
+            total = cursor.getDouble(0);
+        }
+        cursor.close();
         return total;
     }
 }

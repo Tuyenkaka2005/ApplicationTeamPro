@@ -1,21 +1,25 @@
-<!-- res/values/themes.xml -->
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme -->
-    <style name="Theme.BudgetWise" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Primary brand color -->
+
+    <!-- Theme chính của toàn app – BẮT BUỘC kế thừa từ MaterialComponents -->
+    <style name="Theme.BudgetWise" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
         <item name="colorPrimary">#4CAF50</item>
         <item name="colorPrimaryVariant">#388E3C</item>
         <item name="colorOnPrimary">#FFFFFF</item>
 
-        <!-- Secondary brand color -->
-        <item name="colorSecondary">#66BB6A</item>
-        <item name="colorSecondaryVariant">#57A05A</item>
-        <item name="colorOnSecondary">#000000</item>
+        <item name="colorSecondary">#4CAF50</item>
+        <item name="colorSecondaryVariant">#388E3C</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
 
-        <!-- Status bar color -->
+        <!-- Status bar -->
         <item name="android:statusBarColor">#388E3C</item>
+        <item name="android:windowLightStatusBar">false</item>
 
-        <!-- Customize your theme here -->
-        <item name="android:windowBackground">#F5F7FA</item>
+        <!-- Đảm bảo TextInputLayout, Button, Card… dùng đúng style Material -->
+        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
+        <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button</item>
+        <item name="cardViewStyle">@style/Widget.MaterialComponents.CardView</item>
     </style>
+
 </resources>

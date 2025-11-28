@@ -1,6 +1,12 @@
 package com.budgetwise.ad;
 
+import android.Manifest;
 import android.app.AlertDialog;
+
+import android.content.Intent;
+
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -41,7 +47,11 @@ public class BudgetActivity extends AppCompatActivity {
     private BudgetDAO budgetDAO;
     private CategoryDAO categoryDAO;
     private BudgetNotificationManager notificationManager;
-    private String currentUserId = "user_demo"; // Replace with actual user ID from session
+
+//    private String currentUserId = "user_demo"; // Replace with actual user ID from session
+
+    private String currentUserId; // Replace with actual user ID from session
+
     private int currentMonth;
     private int currentYear;
     private List<BudgetStatus> budgetStatuses;
@@ -52,6 +62,20 @@ public class BudgetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget);
+
+        currentUserId = UserSession.getCurrentUserId(this);
+        if (currentUserId == null) {
+            Toast.makeText(this, "Login session expired", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
+        // Xin quyền thông báo trên Android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1001);
+            }
+        }
 
         // Initialize
         initializeViews();
@@ -133,7 +157,7 @@ public class BudgetActivity extends AppCompatActivity {
 
     private void showAddBudgetDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Set Budget");
+        builder.setTitle("Đặt ngân sách");
 
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_budget, null);
         builder.setView(dialogView);
@@ -153,7 +177,7 @@ public class BudgetActivity extends AppCompatActivity {
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategory.setAdapter(categoryAdapter);
 
-        builder.setPositiveButton("Set Budget", (dialog, which) -> {
+        builder.setPositiveButton("Đặt ngân sách", (dialog, which) -> {
             String amountStr = etAmount.getText().toString();
             String thresholdStr = etThreshold.getText().toString();
 

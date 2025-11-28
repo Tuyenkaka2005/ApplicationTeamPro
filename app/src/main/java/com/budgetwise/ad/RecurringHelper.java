@@ -33,8 +33,9 @@ public class RecurringHelper {
     public static List<RecurringExpense> getAllRecurringExpenses(Context context) {
         List<RecurringExpense> list = new ArrayList<>();
         SQLiteDatabase db = DatabaseHelper.getInstance(context).getReadableDatabase();
-//        String userId = UserSession.getCurrentUserId(context);
-        String userId = "user_demo";
+
+        String userId = UserSession.getCurrentUserId(context);
+
 
         Cursor c = db.rawQuery("SELECT * FROM " + DatabaseContract.RecurringExpenseEntry.TABLE_NAME +
                 " WHERE " + DatabaseContract.RecurringExpenseEntry.COLUMN_USER_ID + "=? AND " +
@@ -73,7 +74,6 @@ public class RecurringHelper {
     }
 
     public static void generateMissedRecurringExpenses(Context context) {
-        // Gọi hàm này mỗi khi mở Overview hoặc khi mở app
         List<RecurringExpense> all = getAllRecurringExpenses(context);
         SQLiteDatabase db = DatabaseHelper.getInstance(context).getWritableDatabase();
         long now = System.currentTimeMillis();
@@ -81,39 +81,62 @@ public class RecurringHelper {
         db.beginTransaction();
         try {
             for (RecurringExpense re : all) {
-                while (re.nextRunDate <= now) {
-                    // Tạo expense thực tế
+                // LẤY LẠI nextRunDate từ database để tránh lỗi bộ nhớ
+                long currentNextRun = getLatestNextRunDate(context, re.recurringId);
+
+                while (currentNextRun <= now) {
+                    // Tạo expense
+                    createExpenseFromRecurring(db, re, currentNextRun);
+
+                    // Tính kỳ tiếp theo
+                    currentNextRun = calculateNextRunDate(re.interval, currentNextRun);
+
+                    // CẬP NHẬT NGAY vào database (không tin vào object re nữa)
                     ContentValues cv = new ContentValues();
-                    cv.put(DatabaseContract.ExpenseEntry.COLUMN_EXPENSE_ID, java.util.UUID.randomUUID().toString());
-                    cv.put(DatabaseContract.ExpenseEntry.COLUMN_USER_ID, re.userId);
-                    cv.put(DatabaseContract.ExpenseEntry.COLUMN_CATEGORY_ID, re.categoryId);
-                    cv.put(DatabaseContract.ExpenseEntry.COLUMN_TITLE, re.title);
-                    cv.put(DatabaseContract.ExpenseEntry.COLUMN_AMOUNT, re.amount);
-                    cv.put(DatabaseContract.ExpenseEntry.COLUMN_DATE, re.nextRunDate);
-                    cv.put(DatabaseContract.ExpenseEntry.COLUMN_NOTE, re.note + " (định kỳ)");
-                    cv.put(DatabaseContract.ExpenseEntry.COLUMN_IS_RECURRING, 1);
-                    cv.put(DatabaseContract.ExpenseEntry.COLUMN_RECURRING_ID, re.recurringId);
-                    long time = System.currentTimeMillis();
-                    cv.put(DatabaseContract.ExpenseEntry.COLUMN_CREATED_AT, time);
-                    cv.put(DatabaseContract.ExpenseEntry.COLUMN_UPDATED_AT, time);
-
-                    db.insert(DatabaseContract.ExpenseEntry.TABLE_NAME, null, cv);
-
-                    // Cập nhật next run
-                    long next = calculateNextRunDate(re.interval, re.nextRunDate);
-                    ContentValues updateCv = new ContentValues();
-                    updateCv.put(DatabaseContract.RecurringExpenseEntry.COLUMN_NEXT_RUN_DATE, next);
-                    updateCv.put(DatabaseContract.RecurringExpenseEntry.COLUMN_LAST_RUN_DATE, re.nextRunDate);
-                    db.update(DatabaseContract.RecurringExpenseEntry.TABLE_NAME, updateCv,
+                    cv.put(DatabaseContract.RecurringExpenseEntry.COLUMN_NEXT_RUN_DATE, currentNextRun);
+                    cv.put(DatabaseContract.RecurringExpenseEntry.COLUMN_LAST_RUN_DATE, currentNextRun); // hoặc ngày vừa tạo
+                    db.update(DatabaseContract.RecurringExpenseEntry.TABLE_NAME, cv,
                             DatabaseContract.RecurringExpenseEntry.COLUMN_RECURRING_ID + "=?",
                             new String[]{re.recurringId});
-
-                    re.nextRunDate = next;
                 }
             }
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }
+    }
+    // Lấy nextRunDate mới nhất từ database (tránh lỗi bộ nhớ)
+    private static long getLatestNextRunDate(Context context, String recurringId) {
+        SQLiteDatabase db = DatabaseHelper.getInstance(context).getReadableDatabase();
+        Cursor c = db.rawQuery(
+                "SELECT " + DatabaseContract.RecurringExpenseEntry.COLUMN_NEXT_RUN_DATE +
+                        " FROM " + DatabaseContract.RecurringExpenseEntry.TABLE_NAME +
+                        " WHERE " + DatabaseContract.RecurringExpenseEntry.COLUMN_RECURRING_ID + "=?",
+                new String[]{recurringId}
+        );
+        long nextRun = System.currentTimeMillis();
+        if (c.moveToFirst()) {
+            nextRun = c.getLong(0);
+        }
+        c.close();
+        return nextRun;
+    }
+
+    // Tách riêng việc tạo expense
+    private static void createExpenseFromRecurring(SQLiteDatabase db, RecurringExpense re, long date) {
+        ContentValues cv = new ContentValues();
+        cv.put(DatabaseContract.ExpenseEntry.COLUMN_EXPENSE_ID, java.util.UUID.randomUUID().toString());
+        cv.put(DatabaseContract.ExpenseEntry.COLUMN_USER_ID, re.userId);
+        cv.put(DatabaseContract.ExpenseEntry.COLUMN_CATEGORY_ID, re.categoryId);
+        cv.put(DatabaseContract.ExpenseEntry.COLUMN_TITLE, re.title);
+        cv.put(DatabaseContract.ExpenseEntry.COLUMN_AMOUNT, re.amount);
+        cv.put(DatabaseContract.ExpenseEntry.COLUMN_DATE, date);
+        cv.put(DatabaseContract.ExpenseEntry.COLUMN_NOTE, re.note != null ? re.note + " (định kỳ)" : "(định kỳ)");
+        cv.put(DatabaseContract.ExpenseEntry.COLUMN_IS_RECURRING, 1);
+        cv.put(DatabaseContract.ExpenseEntry.COLUMN_RECURRING_ID, re.recurringId);
+        long now = System.currentTimeMillis();
+        cv.put(DatabaseContract.ExpenseEntry.COLUMN_CREATED_AT, now);
+        cv.put(DatabaseContract.ExpenseEntry.COLUMN_UPDATED_AT, now);
+        db.insert(DatabaseContract.ExpenseEntry.TABLE_NAME, null, cv);
     }
 }
