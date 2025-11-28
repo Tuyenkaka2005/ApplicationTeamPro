@@ -128,7 +128,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return reportItems;
     }
 
-    // Bonus: Lấy tổng chi tiêu trong khoảng thời gian
+    //  Lấy tổng chi tiêu trong khoảng thời gian
     public double getTotalSpent(String userId, long startDate, long endDate) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT COALESCE(SUM(" + ExpenseEntry.COLUMN_AMOUNT + "), 0) FROM " +

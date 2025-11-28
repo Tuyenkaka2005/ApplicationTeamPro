@@ -19,7 +19,7 @@
             android:id="@+id/tvCategoryName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thực phẩm"
+            android:text="Food"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#2E3A59"/>

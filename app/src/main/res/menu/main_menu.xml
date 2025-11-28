@@ -5,12 +5,12 @@
     <!-- Các mục khác trong overflow menu -->
     <item
         android:id="@+id/action_profile"
-        android:title="Hồ sơ cá nhân"
+        android:title="Personal profile"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_settings"
-        android:title="Cài đặt"
+        android:title="Setting"
         app:showAsAction="never" />
 
 </menu>
