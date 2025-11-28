@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#4CAF50"
-        app:title="Thêm chi tiêu"
+        app:title="Add spending"
         app:titleTextColor="#FFFFFF"
         app:navigationIcon="@drawable/ic_arrow_back"
         app:navigationIconTint="#FFFFFF" />
@@ -37,7 +37,7 @@
                     android:id="@+id/etExpenseTitle"
                     android:layout_width="match_parent"
                     android:layout_height="95dp"
-                    android:hint="Tên chi tiêu (VD: Ăn trưa, Grab)" />
+                    android:hint="Expense name (eg: Lunch, Grab)" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Amount -->
@@ -50,7 +50,7 @@
                     android:id="@+id/etExpenseAmount"
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:hint="Số tiền (VD: 55000)"
+                    android:hint="Amount (eg: 55000)"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,7 +80,7 @@
                     android:layout_height="67dp"
                     android:clickable="true"
                     android:focusable="false"
-                    android:hint="Ngày chi (dd/MM/yyyy)" />
+                    android:hint="Date (dd/MM/yyyy)" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Note -->
@@ -93,7 +93,7 @@
                     android:id="@+id/etExpenseNote"
                     android:layout_width="match_parent"
                     android:layout_height="57dp"
-                    android:hint="Ghi chú (không bắt buộc)"
+                    android:hint="Notes (optional)"
                     android:maxLines="3" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,7 +102,7 @@
                 android:id="@+id/btnSaveExpense"
                 android:layout_width="match_parent"
                 android:layout_height="71dp"
-                android:text="Lưu chi tiêu"
+                android:text="Save spending"
                 android:textSize="16sp"
                 app:cornerRadius="12dp" />
 

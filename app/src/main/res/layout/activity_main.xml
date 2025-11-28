@@ -21,6 +21,7 @@
             app:title="CampusExpense Manager"
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@drawable/ic_arrow_back"
+
             app:navigationContentDescription="Back">
 
             <ImageButton
@@ -30,7 +31,8 @@
                 android:layout_gravity="end"
                 android:layout_marginEnd="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Logout"
+
+                android:contentDescription="Log out"
                 android:src="@drawable/ic_logout"
                 app:tint="@android:color/white" />
 
@@ -68,7 +70,8 @@
                         android:id="@+id/tvGreeting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Welcome!"
+
+                        android:text="Hello!"
                         android:textColor="#FFFFFF"
                         android:textSize="26sp"
                         android:textStyle="bold" />
@@ -110,7 +113,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Total Spent"
+
+                            android:text="Total expenditure"
                             android:textColor="#FFFFFF"
                             android:textSize="14sp" />
 
@@ -145,7 +149,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Remaining Budget"
+
+                            android:text="Remaining budget"
                             android:textColor="#FFFFFF"
                             android:textSize="14sp" />
 
@@ -169,7 +174,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
-                android:text="Features"
+
+                android:text="Function"
                 android:textColor="#1A1A1A"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -211,7 +217,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Expense Tracking"
+
+                            android:text="Track Expenses"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -253,7 +260,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Budget Setup"
+
+                            android:text="Setting a Budget"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -295,7 +303,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/main_card_overview_title"
+
+                            android:text="Cost Overview"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -337,7 +346,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/main_card_recurring_title"
+
+                            android:text="Recurring Expenses"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -421,7 +431,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Search &amp; Filter"
+
+                            android:text="Search and Filter"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />

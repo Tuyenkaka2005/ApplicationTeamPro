@@ -1,4 +1,3 @@
-// SignUpActivity.java - ĐÚNG LOGIC: Đăng ký xong → quay về Login
 package com.budgetwise.ad;
 
 import android.content.Intent;
@@ -30,7 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
             if (email != null) {
                 etEmail.setText(email);
                 etPassword.requestFocus(); // Chuyển con trỏ sang mật khẩu
-                Toast.makeText(this, "Đăng ký thành công! Hãy đăng nhập", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Registration successful! Please log in", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -44,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         btnSignUp.setOnClickListener(v -> {
             btnSignUp.setEnabled(false);
-            btnSignUp.setText("Đang tạo tài khoản...");
+            btnSignUp.setText("Creating account...");
             signUp();
         });
         tvLogin = findViewById(R.id.tvLogin);
@@ -59,27 +58,27 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Validate
         if (TextUtils.isEmpty(name)) {
-            showError(etName, "Vui lòng nhập họ tên");
+            showError(etName, "Please enter your full name");
             resetButton();
             return;
         }
         if (TextUtils.isEmpty(email) || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            showError(etEmail, "Email không hợp lệ");
+            showError(etEmail, "Invalid email");
             resetButton();
             return;
         }
         if (password.length() < 6) {
-            showError(etPassword, "Mật khẩu phải từ 6 ký tự trở lên");
+            showError(etPassword, "Password must be 6 characters or more");
             resetButton();
             return;
         }
         if (!password.equals(confirmPassword)) {
-            showError(etConfirmPassword, "Mật khẩu không khớp");
+            showError(etConfirmPassword, "Passwords do not match");
             resetButton();
             return;
         }
         if (userDAO.getUserByEmail(email) != null) {
-            showError(etEmail, "Email này đã được sử dụng");
+            showError(etEmail, "This email is already in use");
             resetButton();
             return;
         }
@@ -90,7 +89,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         long result = userDAO.createUser(user);
         if (result > 0) {
-            Toast.makeText(this, "Đăng ký thành công! Vui lòng đăng nhập", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Registration successful! Please login", Toast.LENGTH_LONG).show();
 
             // CHỈ TRẢ VỀ LOGIN – KHÔNG TỰ ĐỘNG ĐĂNG NHẬP
             Intent intent = new Intent(this, LoginActivity.class);
@@ -99,7 +98,7 @@ public class SignUpActivity extends AppCompatActivity {
             startActivity(intent);
             finish(); // Đóng SignUpActivity
         } else {
-            Toast.makeText(this, "Lỗi hệ thống, vui lòng thử lại", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "System error, please try again", Toast.LENGTH_SHORT).show();
             resetButton();
         }
     }
@@ -115,7 +114,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void resetButton() {
         btnSignUp.setEnabled(true);
-        btnSignUp.setText("Đăng ký");
+        btnSignUp.setText("Register");
     }
 
     @Override

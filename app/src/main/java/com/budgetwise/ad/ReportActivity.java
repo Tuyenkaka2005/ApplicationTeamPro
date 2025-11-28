@@ -144,7 +144,7 @@ public class ReportActivity extends AppCompatActivity {
         }
 
         adapter.setData(items);
-        adapter.notifyDataSetChanged(); // Quan trọng!
+        adapter.notifyDataSetChanged();
     }
 
     private void setupPieChart(List<CategoryReportItem> items, float total) {
@@ -175,12 +175,12 @@ public class ReportActivity extends AppCompatActivity {
         pieChart.setHoleRadius(40f);
         pieChart.setTransparentCircleRadius(45f);
         pieChart.animateY(1000);
-        pieChart.invalidate(); // Vẽ lại
+        pieChart.invalidate();
     }
 
     // Helper: Reset màu nút bấm
     private void updateButtonStyle(Button activeBtn) {
-        // Code đơn giản để đổi màu nút đang chọn (bạn có thể tùy biến thêm)
+
         btnThisMonth.setAlpha(0.5f);
         btnLastMonth.setAlpha(0.5f);
         btnThisYear.setAlpha(0.5f);

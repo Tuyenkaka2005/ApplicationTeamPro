@@ -25,7 +25,7 @@ public class SearchFilterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_expense);  // ĐÃ FIX: file phải tên đúng là activity_search_filter.xml
+        setContentView(R.layout.activity_search_expense);
 
         dao = new ExpenseDAO(this);
         adapter = new ExpenseSearchAdapter();
@@ -36,7 +36,7 @@ public class SearchFilterActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_back).setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
-        // Tìm kiếm realtime - ĐÃ FIX TextWatcher
+        // Tìm kiếm realtime
         ((EditText) findViewById(R.id.et_search_input)).addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
@@ -69,7 +69,6 @@ public class SearchFilterActivity extends AppCompatActivity {
         // > 100k
         addChip(group, "> 100k", () -> minAmount = 100000.0, () -> minAmount = null);
 
-        // Bạn có thể thêm thoải mái: >50k, <10k, Tuần này, Hôm qua...
     }
 
     private void addChip(ChipGroup g, String text, Runnable onSelect, Runnable onUnselect) {
@@ -92,7 +91,7 @@ public class SearchFilterActivity extends AppCompatActivity {
 
         adapter.updateData(list);
 
-        // ĐÃ FIX lỗi View.VISIBLE / View.GONE
+
         findViewById(R.id.rv_search_results).setVisibility(list.isEmpty() ? View.GONE : View.VISIBLE);
         findViewById(R.id.layout_empty_state).setVisibility(list.isEmpty() ? View.VISIBLE : View.GONE);
     }

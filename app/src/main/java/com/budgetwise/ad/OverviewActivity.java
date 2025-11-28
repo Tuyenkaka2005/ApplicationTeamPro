@@ -1,4 +1,3 @@
-// OverviewActivity.java
 package com.budgetwise.ad;
 
 import android.os.Bundle;
@@ -20,7 +19,7 @@ public class OverviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
-        // Quan trọng: Sinh các khoản định kỳ trước khi tính tổng
+        // Sinh các khoản định kỳ trước khi tính tổng
         OverviewHelper.generateMissedRecurringExpenses(this);
 
         initViews();
