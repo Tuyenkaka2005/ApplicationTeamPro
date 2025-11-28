@@ -11,7 +11,7 @@ public class Expense {
     private String note;
     private long date;           // ngày chi tiêu (timestamp)
     private boolean isRecurring; // có phải là khoản được sinh từ recurring không
-    private String recurringId;  // ID của RecurringExpense (nếu có)
+    private String recurringId;  // ID của RecurringExpense
     private long createdAt;
     private long updatedAt;
 

@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thiết lập ngân sách"
+        android:text="Set a budget"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#333333"
@@ -65,7 +65,7 @@
         android:background="#4CAF50"
         android:elevation="2dp"
         android:padding="12dp"
-        android:text="+ Thêm ngân sách mới"
+        android:text="+ Add new budget"
         android:textColor="#2F0D0D"
         android:textSize="16sp" />
 
@@ -73,7 +73,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ngân sách của bạn"
+        android:text="Your budget"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="#666666"

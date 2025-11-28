@@ -1,4 +1,3 @@
-// User.java - Model class for User
 package com.budgetwise.ad;
 
 public class User {

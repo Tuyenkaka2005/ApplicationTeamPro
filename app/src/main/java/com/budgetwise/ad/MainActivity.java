@@ -39,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Nút back (nếu cần)
+        // Nút back
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // NÚT LOGOUT HOẠT ĐỘNG 100%
+        // NÚT LOGOUT
         findViewById(R.id.btnLogout).setOnClickListener(v -> showLogoutDialog());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

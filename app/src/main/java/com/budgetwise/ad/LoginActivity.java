@@ -1,4 +1,3 @@
-// LoginActivity.java - Activity for user login
 package com.budgetwise.ad;
 
 import android.content.Intent;
