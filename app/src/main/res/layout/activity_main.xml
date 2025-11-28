@@ -8,8 +8,7 @@
     android:background="#F5F7FA"
     tools:context=".MainActivity">
 
-    <!-- Toolbar với nút đăng xuất -->
-    <!-- Toolbar với nút đăng xuất BÊN TRONG MaterialToolbar -->
+    <!-- Toolbar with logout button -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -22,9 +21,8 @@
             app:title="CampusExpense Manager"
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationContentDescription="Quay lại">
+            app:navigationContentDescription="Back">
 
-            <!-- NÚT LOGOUT ĐẶT BÊN TRONG TOOLBAR → HOẠT ĐỘNG 100% -->
             <ImageButton
                 android:id="@+id/btnLogout"
                 android:layout_width="48dp"
@@ -32,14 +30,14 @@
                 android:layout_gravity="end"
                 android:layout_marginEnd="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Đăng xuất"
+                android:contentDescription="Logout"
                 android:src="@drawable/ic_logout"
                 app:tint="@android:color/white" />
 
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Nội dung cuộn -->
+    <!-- Scrolling content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,7 +49,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Header chào mừng -->
+            <!-- Welcome Header -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +68,7 @@
                         android:id="@+id/tvGreeting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Xin chào!"
+                        android:text="Welcome!"
                         android:textColor="#FFFFFF"
                         android:textSize="26sp"
                         android:textStyle="bold" />
@@ -79,13 +77,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Quản lý tài chính thông minh cùng CampusExpense Manager"
+                        android:text="Manage your finances smartly with CampusExpense Manager"
                         android:textColor="#E3F2FD"
                         android:textSize="15sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Tổng quan nhanh -->
+            <!-- Quick Overview -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,7 +91,7 @@
                 android:layout_marginEnd="16dp"
                 android:orientation="horizontal">
 
-                <!-- Tổng chi tiêu -->
+                <!-- Total Spent -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
@@ -112,7 +110,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tổng chi tiêu"
+                            android:text="Total Spent"
                             android:textColor="#FFFFFF"
                             android:textSize="14sp" />
 
@@ -128,7 +126,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Ngân sách còn lại -->
+                <!-- Remaining Budget -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
@@ -147,7 +145,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Ngân sách còn lại"
+                            android:text="Remaining Budget"
                             android:textColor="#FFFFFF"
                             android:textSize="14sp" />
 
@@ -164,19 +162,19 @@
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
-            <!-- Tiêu đề chức năng -->
+            <!-- Features Title -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
-                android:text="Chức năng"
+                android:text="Features"
                 android:textColor="#1A1A1A"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <!-- Danh sách chức năng -->
+            <!-- Features List -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -184,7 +182,7 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp">
 
-                <!-- 1. Theo dõi Chi phí -->
+                <!-- 1. Expense Tracking -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardExpenseTracking"
                     android:layout_width="match_parent"
@@ -213,7 +211,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Theo dõi Chi phí"
+                            android:text="Expense Tracking"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -226,7 +224,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- 2. Thiết lập Ngân sách -->
+                <!-- 2. Budget Setup -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardBudgetSetup"
                     android:layout_width="match_parent"
@@ -255,7 +253,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Thiết lập Ngân sách"
+                            android:text="Budget Setup"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -268,7 +266,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- 3. Tổng quan Chi phí -->
+                <!-- 3. Expense Overview -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardExpenseOverview"
                     android:layout_width="match_parent"
@@ -297,7 +295,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Tổng quan Chi phí"
+                            android:text="@string/main_card_overview_title"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -310,7 +308,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- 4. Chi phí Định kỳ -->
+                <!-- 4. Recurring Expenses -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardRecurringExpenses"
                     android:layout_width="match_parent"
@@ -339,7 +337,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Chi phí Định kỳ"
+                            android:text="@string/main_card_recurring_title"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -352,7 +350,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- 5. Báo cáo Chi phí -->
+                <!-- 5. Expense Report -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardExpenseReport"
                     android:layout_width="match_parent"
@@ -381,7 +379,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Báo cáo Chi phí"
+                            android:text="Expense Report"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -394,7 +392,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- 6. Tìm kiếm & Lọc -->
+                <!-- 6. Search & Filter -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardSearchFilter"
                     android:layout_width="match_parent"
@@ -423,7 +421,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Tìm kiếm và Lọc"
+                            android:text="Search &amp; Filter"
                             android:textColor="#333333"
                             android:textSize="17sp"
                             android:textStyle="bold" />

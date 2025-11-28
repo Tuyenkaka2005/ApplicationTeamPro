@@ -30,6 +30,78 @@ public class RecurringHelper {
         return db.insert(DatabaseContract.RecurringExpenseEntry.TABLE_NAME, null, cv) != -1;
     }
 
+    public static RecurringExpense getRecurringExpenseById(Context context, String recurringId) {
+        SQLiteDatabase db = DatabaseHelper.getInstance(context).getReadableDatabase();
+        String userId = UserSession.getCurrentUserId(context);
+        Cursor c = null;
+        try {
+            c = db.query(
+                    DatabaseContract.RecurringExpenseEntry.TABLE_NAME,
+                    null, // All columns
+                    DatabaseContract.RecurringExpenseEntry.COLUMN_RECURRING_ID + " = ? AND " +
+                    DatabaseContract.RecurringExpenseEntry.COLUMN_USER_ID + " = ?",
+                    new String[]{recurringId, userId},
+                    null, null, null
+            );
+
+            if (c != null && c.moveToFirst()) {
+                return new RecurringExpense(
+                        c.getString(c.getColumnIndexOrThrow(DatabaseContract.RecurringExpenseEntry.COLUMN_RECURRING_ID)),
+                        userId,
+                        c.getString(c.getColumnIndexOrThrow(DatabaseContract.RecurringExpenseEntry.COLUMN_CATEGORY_ID)),
+                        c.getString(c.getColumnIndexOrThrow(DatabaseContract.RecurringExpenseEntry.COLUMN_TITLE)),
+                        c.getDouble(c.getColumnIndexOrThrow(DatabaseContract.RecurringExpenseEntry.COLUMN_AMOUNT)),
+                        c.getString(c.getColumnIndexOrThrow(DatabaseContract.RecurringExpenseEntry.COLUMN_NOTE)),
+                        c.getString(c.getColumnIndexOrThrow(DatabaseContract.RecurringExpenseEntry.COLUMN_INTERVAL)),
+                        c.getLong(c.getColumnIndexOrThrow(DatabaseContract.RecurringExpenseEntry.COLUMN_START_DATE)),
+                        c.getLong(c.getColumnIndexOrThrow(DatabaseContract.RecurringExpenseEntry.COLUMN_NEXT_RUN_DATE))
+                );
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+        }
+        return null; // Not found
+    }
+
+    public static boolean updateRecurringExpense(Context context, RecurringExpense re) {
+        SQLiteDatabase db = DatabaseHelper.getInstance(context).getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        // Don't update ID, user ID, or start date
+        cv.put(DatabaseContract.RecurringExpenseEntry.COLUMN_CATEGORY_ID, re.categoryId);
+        cv.put(DatabaseContract.RecurringExpenseEntry.COLUMN_TITLE, re.title);
+        cv.put(DatabaseContract.RecurringExpenseEntry.COLUMN_AMOUNT, re.amount);
+        cv.put(DatabaseContract.RecurringExpenseEntry.COLUMN_NOTE, re.note);
+        cv.put(DatabaseContract.RecurringExpenseEntry.COLUMN_INTERVAL, re.interval);
+        cv.put(DatabaseContract.RecurringExpenseEntry.COLUMN_NEXT_RUN_DATE, re.nextRunDate);
+        cv.put(DatabaseContract.RecurringExpenseEntry.COLUMN_UPDATED_AT, System.currentTimeMillis());
+
+        int rows = db.update(DatabaseContract.RecurringExpenseEntry.TABLE_NAME, cv,
+                DatabaseContract.RecurringExpenseEntry.COLUMN_RECURRING_ID + " = ? AND " +
+                DatabaseContract.RecurringExpenseEntry.COLUMN_USER_ID + " = ?",
+                new String[]{re.recurringId, re.userId});
+
+        return rows > 0;
+    }
+
+    public static boolean deleteRecurringExpense(Context context, String recurringId) {
+        // Soft delete by setting isActive to 0
+        SQLiteDatabase db = DatabaseHelper.getInstance(context).getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(DatabaseContract.RecurringExpenseEntry.COLUMN_IS_ACTIVE, 0);
+        cv.put(DatabaseContract.RecurringExpenseEntry.COLUMN_UPDATED_AT, System.currentTimeMillis());
+        
+        String userId = UserSession.getCurrentUserId(context);
+
+        int rows = db.update(DatabaseContract.RecurringExpenseEntry.TABLE_NAME, cv,
+                DatabaseContract.RecurringExpenseEntry.COLUMN_RECURRING_ID + " = ? AND " +
+                DatabaseContract.RecurringExpenseEntry.COLUMN_USER_ID + " = ?",
+                new String[]{recurringId, userId});
+        return rows > 0;
+    }
+
+
     public static List<RecurringExpense> getAllRecurringExpenses(Context context) {
         List<RecurringExpense> list = new ArrayList<>();
         SQLiteDatabase db = DatabaseHelper.getInstance(context).getReadableDatabase();

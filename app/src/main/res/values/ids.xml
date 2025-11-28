@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tvRecurringAmount" type="id" />
+    <item name="tvRecurringCategory" type="id" />
+    <item name="tvRecurringInterval" type="id" />
+    <item name="tvNextRun" type="id" />
+    <item name="btnDeleteItem" type="id" />
+</resources>

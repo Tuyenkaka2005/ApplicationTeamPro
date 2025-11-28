@@ -31,9 +31,17 @@ android {
     }
 }
 
+// Force specific versions to resolve dependency conflicts
+configurations.all {
+    resolutionStrategy {
+        force(libs.appcompat)
+        force(libs.material)
+        force(libs.activity)
+        force(libs.constraintlayout)
+    }
+}
+
 dependencies {
-
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -42,15 +50,4 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("com.google.android.material:material:1.13.0")   // quan trọng nhất
-    implementation("androidx.activity:activity:1.9.3")
-    implementation("androidx.constraintlayout:constraintlayout:2.2.0")
-
-    implementation("com.google.android.material:material:1.12.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
-
 }
