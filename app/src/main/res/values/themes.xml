@@ -3,7 +3,7 @@
 
     <!-- Theme chính của toàn app – BẮT BUỘC kế thừa từ MaterialComponents -->
     <style name="Theme.BudgetWise" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Màu chủ đạo xanh lá đẹp như thiết kế của bạn -->
+
         <item name="colorPrimary">#4CAF50</item>
         <item name="colorPrimaryVariant">#388E3C</item>
         <item name="colorOnPrimary">#FFFFFF</item>

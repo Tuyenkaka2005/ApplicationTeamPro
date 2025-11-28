@@ -1,4 +1,3 @@
-// ExpenseActivity.java - HOÀN HẢO 100% - ĐÃ QUA KIỂM THỬ THỰC TẾ
 package com.budgetwise.ad;
 
 import android.app.DatePickerDialog;

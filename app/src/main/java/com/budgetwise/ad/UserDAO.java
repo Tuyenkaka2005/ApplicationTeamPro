@@ -1,4 +1,3 @@
-// UserDAO.java - Data Access Object for User operations
 package com.budgetwise.ad;
 
 import android.content.ContentValues;

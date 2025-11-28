@@ -1,4 +1,3 @@
-// SignUpActivity.java - ĐÚNG LOGIC: Đăng ký xong → quay về Login
 package com.budgetwise.ad;
 
 import android.content.Intent;
