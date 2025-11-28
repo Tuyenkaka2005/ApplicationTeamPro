@@ -7,9 +7,10 @@
     android:background="#F5F7FA">
 
     <TextView
+        android:id="@+id/tvRecurringTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thêm chi phí định kỳ"
+        android:text="@string/recurring_expense_title_add"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#2E3A59"
@@ -20,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@drawable/edittext_rounded"
-        android:hint="Tên chi phí (vd: Tiền nhà)" />
+        android:hint="@string/recurring_expense_name_hint" />
 
     <EditText
         android:id="@+id/etRecurringAmount"
@@ -28,7 +29,7 @@
         android:layout_height="52dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/edittext_rounded"
-        android:hint="Số tiền"
+        android:hint="@string/recurring_expense_amount_hint"
         android:inputType="numberDecimal" />
 
     <Spinner
@@ -50,21 +51,41 @@
         android:layout_height="52dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/edittext_rounded"
-        android:hint="Ghi chú (không bắt buộc)" />
+        android:hint="@string/recurring_expense_note_hint" />
 
-    <Button
-        android:id="@+id/btnAddRecurring"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thêm chi phí định kỳ"
-        android:textColor="@android:color/white"
-        android:backgroundTint="#4CAF50"
-        android:layout_marginTop="20dp"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/btnAddRecurring"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/recurring_expense_add_button"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#4CAF50"
+            android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/btnDeleteRecurring"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/recurring_expense_delete_button"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#E53935"
+            android:layout_marginStart="4dp"
+            android:visibility="gone"/>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Danh sách định kỳ"
+        android:text="@string/recurring_expense_list_title"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="24dp"
