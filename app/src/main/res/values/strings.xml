@@ -1,5 +1,41 @@
 <resources>
     <string name="app_name">AD</string>
+
+    <!-- Recurring Expense Strings -->
+    <string name="recurring_expense_title_add">Add Recurring Expense</string>
+    <string name="recurring_expense_title_edit">Edit Recurring Expense</string>
+    <string name="recurring_expense_name_hint">Expense Name (e.g., Rent)</string>
+    <string name="recurring_expense_amount_hint">Amount</string>
+    <string name="recurring_expense_note_hint">Note (optional)</string>
+    <string name="recurring_expense_add_button">Add</string>
+    <string name="recurring_expense_update_button">Update</string>
+    <string name="recurring_expense_delete_button">Delete</string>
+    <string name="recurring_expense_list_title">Recurring List</string>
+    <string name="recurring_expense_error_not_found">Expense not found!</string>
+    <string name="recurring_expense_error_enter_name_amount">Please enter name and amount!</string>
+    <string name="recurring_expense_error_no_category">No categories available!</string>
+    <string name="recurring_expense_error_invalid_amount">Invalid amount!</string>
+    <string name="recurring_expense_success_added">Recurring expense added!</string>
+    <string name="recurring_expense_error_add">Error while adding!</string>
+    <string name="recurring_expense_success_updated">Update successful!</string>
+    <string name="recurring_expense_error_update">Error while updating!</string>
+    <string name="recurring_expense_confirm_delete_title">Confirm Deletion</string>
+    <string name="recurring_expense_confirm_delete_message">Are you sure you want to delete this recurring expense?</string>
+    <string name="recurring_expense_success_deleted">Successfully deleted!</string>
+    <string name="recurring_expense_error_delete">Error while deleting!</string>
+
+    <!-- Overview Strings -->
+    <string name="overview_title">This Months Overview</string>
+    <string name="overview_spent">Spent</string>
+    <string name="overview_budget">Budget</string>
+    <string name="overview_remaining">Remaining</string>
+    <string name="overview_category_details">Details by Category</string>
+
+    <!-- Main Activity Strings -->
+    <string name="main_card_overview_title">Expense Overview</string>
+    <string name="main_card_recurring_title">Recurring Expenses</string>
+
+
     <string-array name="recurring_intervals">
         <item>Monthly</item>
         <item>Weekly</item>

@@ -1,4 +1,3 @@
-// RecurringExpenseAdapter.java
 package com.budgetwise.ad;
 
 import android.content.Context;
@@ -8,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -15,14 +15,19 @@ import java.util.Locale;
 
 public class RecurringExpenseAdapter extends RecyclerView.Adapter<RecurringExpenseAdapter.ViewHolder> {
 
-    private Context context;
-    private List<RecurringExpense> list;
-    private Runnable onUpdate;
+    public interface OnItemActionListener {
+        void onEditClick(RecurringExpense expense);
+        void onDeleteClick(RecurringExpense expense);
+    }
 
-    public RecurringExpenseAdapter(Context context, List<RecurringExpense> list, Runnable onUpdate) {
+    private final Context context;
+    private final List<RecurringExpense> list;
+    private final OnItemActionListener listener;
+
+    public RecurringExpenseAdapter(Context context, List<RecurringExpense> list, OnItemActionListener listener) {
         this.context = context;
         this.list = list;
-        this.onUpdate = onUpdate;
+        this.listener = listener;
     }
 
     @NonNull
@@ -33,18 +38,25 @@ public class RecurringExpenseAdapter extends RecyclerView.Adapter<RecurringExpen
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder h, int p) {
-        RecurringExpense re = list.get(p);
-        CategoryDAO dao = new CategoryDAO(context);
-        Category cat = dao.getCategoryById(re.categoryId);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        RecurringExpense re = list.get(position);
 
-        h.tvTitle.setText(re.title);
-        h.tvAmount.setText(String.format(Locale.getDefault(), "%,.0f đ", re.amount));
-        h.tvCategory.setText(cat != null ? cat.getName() : "Không xác định");
-        h.tvInterval.setText("Mỗi " + re.interval.toLowerCase());
+        holder.tvRecurringCategory.setText(
+                CategoryHelper.getCategoryNameById(context, re.getCategoryId())
+                        + " • each " + re.getInterval().toLowerCase()
+        );
+
+        holder.tvRecurringTitle.setText(re.getTitle());
+        holder.tvRecurringAmount.setText(String.format(Locale.getDefault(), "%,.0f đ", re.getAmount()));
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        h.tvNextRun.setText("Lần tới: " + sdf.format(new Date(re.nextRunDate)));
+        holder.tvRecurringInterval.setText("next time: " + sdf.format(new Date(re.getNextRunDate())));
+
+        // Click vào toàn bộ item → Edit
+        holder.itemView.setOnClickListener(v -> listener.onEditClick(re));
+
+        // Click nút xóa → Delete
+        holder.itemView.findViewById(R.id.btnDeleteItem).setOnClickListener(v -> listener.onDeleteClick(re));
     }
 
     @Override
@@ -52,15 +64,14 @@ public class RecurringExpenseAdapter extends RecyclerView.Adapter<RecurringExpen
         return list.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle, tvAmount, tvCategory, tvInterval, tvNextRun;
-
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tvRecurringTitle, tvRecurringAmount, tvRecurringCategory, tvRecurringInterval, tvNextRun;
         ViewHolder(View v) {
             super(v);
-            tvTitle = v.findViewById(R.id.tvRecurringTitle);
-            tvAmount = v.findViewById(R.id.tvRecurringAmount);
-            tvCategory = v.findViewById(R.id.tvRecurringCategory);
-            tvInterval = v.findViewById(R.id.tvRecurringInterval);
+            tvRecurringTitle = v.findViewById(R.id.tvRecurringTitle);
+            tvRecurringAmount = v.findViewById(R.id.tvRecurringAmount);
+            tvRecurringCategory = v.findViewById(R.id.tvRecurringCategory);
+            tvRecurringInterval = v.findViewById(R.id.tvRecurringInterval);
             tvNextRun = v.findViewById(R.id.tvNextRun);
         }
     }
